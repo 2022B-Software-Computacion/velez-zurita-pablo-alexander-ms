@@ -27,7 +27,7 @@ class Marca {
         listaModelos.forEach{
             idsModelos += ","+it.id.toString()
         }
-        return "$id,$nombre,$fechaFundacion,$paisOrigen$idsModelos"
+        return "$id,$nombre,$paisOrigen,$fechaFundacion$idsModelos"
     }
     override fun toString(): String {
         var modelos: String = ""
