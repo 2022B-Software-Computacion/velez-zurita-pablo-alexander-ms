@@ -26,23 +26,24 @@ class ESqliteHelperEntrenador (
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        fun crearEntrenador(
-            nombre: String,
-            descripcion: String
-        ): Boolean {
-            val basedatosEscritura = writableDatabase
-            val valoresAGuardar = ContentValues()
-            valoresAGuardar.put("nombre", nombre)
-            valoresAGuardar.put("descripcion", descripcion)
-            val resultadoGuardar = basedatosEscritura
-                .insert(
-                    "ENTRENADOR", //Nombre tabla
+
+    }
+    fun crearEntrenador(
+        nombre: String,
+        descripcion: String
+    ): Boolean {
+        val basedatosEscritura = writableDatabase
+        val valoresAGuardar = ContentValues()
+        valoresAGuardar.put("nombre", nombre)
+        valoresAGuardar.put("descripcion", descripcion)
+        val resultadoGuardar = basedatosEscritura
+            .insert(
+                "ENTRENADOR", //Nombre tabla
                 null,
-                    valoresAGuardar //valorer
-                )
-            basedatosEscritura.close()
-            return if(resultadoGuardar.toInt() == -1) false else true
-        }
+                valoresAGuardar //valorer
+            )
+        basedatosEscritura.close()
+        return if(resultadoGuardar.toInt() == -1) false else true
     }
 
     fun eliminarEntrenadorFormulario(id: Int): Boolean {
