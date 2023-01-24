@@ -12,7 +12,7 @@ fun main(){
         println("4.- Eliminar una Marca ingresada       |8.- Eliminar un Modelo ingresado")
         println("-------------------------------------")
         println("9.- Finalizar programa")
-        println("Ingrese una opcion")
+        println("Ingrese una opcion:")
 
         opcion = readln().toString()
 
@@ -44,7 +44,7 @@ fun main(){
             ("9") -> {
                 println("Hemos salido")
             }
-            else -> println("Opción no válida")
+            else -> println("Fina del programa")
         }
     } while (opcion != "9")
 }
@@ -68,7 +68,6 @@ fun registrarMarca(){
         archivo = File("Marca.txt")
         fw = FileWriter(archivo, true)
         pw = PrintWriter(fw)
-        //
         pw.println(miMarca.obtenerAtributos())
 
     } catch (e: Exception) {
@@ -89,7 +88,6 @@ fun mostrarMarca(){
         val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
         reader.lines().forEach{
             var miListaModelos = mutableListOf<Modelo>()
-            //miListaCanciones.clear()
             val tokens = StringTokenizer(it, ",")
             var dato: String = tokens.nextToken()
             val nuevaMarca = Marca()
@@ -204,9 +202,9 @@ fun actualizarInformacionMarca(){
         }
     }
     val indiceMarca = listaMarcas.indexOf(marcaAux)
-    // Eliminamos el album anterior
+    // Eliminamos la marca anterior
     listaMarcas.remove(marcaAux)
-    // Actualizamos la cancion
+    // Actualizamos el modelo
     print("Escriba el id de la Marca: ")
     marcaAux.id = readln().toInt()
     print("Escriba el nuevo nombre de la Marca: ")
@@ -215,10 +213,8 @@ fun actualizarInformacionMarca(){
     marcaAux.paisOrigen = readln()
     print("Escriba la nueva fecha de fundacion de la Marca (yy-mm-dd): ")
     marcaAux.fechaFundacion = LocalDate.parse(readln())
-    // Añadimos el album actualizado
+    // Añadimos la marca actualizada
     listaMarcas.add(indiceMarca, marcaAux)
-
-    //println(listaAlbumes)
 
     // Vamos a reescribir toodo el archivo
     var archivo: File?
@@ -244,7 +240,7 @@ fun actualizarInformacionMarca(){
 
 fun eliminarMarca(){
     val listaMarcas = mutableListOf<Marca>()
-    println("Introduzca el ID del album que desea eliminar")
+    println("Introduzca el ID de la marca que desea eliminar")
     val id = readln().toInt()
     // Lee el archivo y genera una lista con las marcas actuales
     val file = File("Marca.txt")
@@ -304,7 +300,7 @@ fun registrarModelo(){
     var archivo: File?
     var fw: FileWriter? = null
     var pw: PrintWriter?
-    // Obtener los datos de la canción
+    // Obtener los datos de un modelo
     print("Escriba el id del modelo: ")
     miModelo.id = readln().toInt()
     print("Escriba el nombre del modelo: ")
@@ -313,7 +309,7 @@ fun registrarModelo(){
     miModelo.fechaLanzamiento = LocalDate.parse(readln())
     print("Escriba el precio promedio del modelo: ")
     miModelo.precio = readln().toFloat()
-    print("Escriba la descripcion del modelo: ")
+    print("Escriba la descripcion del modelo (no ingrese comas): ")
     miModelo.descripcion = readln()
     try {
         archivo = File("Modelo.txt")
@@ -390,28 +386,26 @@ fun actualizarInformacionModelo(){
         }
     }
     val indiceCancion = listaModelos.indexOf(modeloAux)
-    // Eliminamos la cancion anterior
+    // Eliminamos el modelo anterior
     listaModelos.remove(modeloAux)
-    // Actualizamos la cancion
+    // Actualizamos el modelo
     print("Escriba el nuevo nombre del modelo: ")
     modeloAux.nombre = readln()
     print("Escriba la nueva fecha de lanzamiento del modelo (yy-mm-dd): ")
     modeloAux.fechaLanzamiento = LocalDate.parse(readln())
     print("Escriba el nuevo precio promedio del modelo: ")
     modeloAux.precio = readln().toFloat()
-    print("Escriba la nueva descripcion del modelo: ")
+    print("Escriba la nueva descripcion del modelo (no ingrese comas): ")
     modeloAux.descripcion = readln()
-    // Añadimos la cancion actualizada
+    // Añadimos el modelo actualizada
     listaModelos.add(indiceCancion, modeloAux)
-
-    //println(listaCanciones)
 
     // Vamos a reescribir toodo el archivo
     var archivo: File?
     var fw: FileWriter? = null
     var pw: PrintWriter?
     try {
-        archivo = File("Canciones.txt")
+        archivo = File("Modelo.txt")
         fw = FileWriter(archivo)
         pw = PrintWriter(fw)
         listaModelos.forEach {
@@ -458,7 +452,7 @@ fun eliminarModelo(){
     }
     listaModelos.remove(modeloAux)
     // Ya se tiene una lista sin el elemento
-    // Vamos a reescribir toodo el archivo
+    // Vamos a reescribir t0do el archivo
     var archivo: File?
     var fw: FileWriter? = null
     var pw: PrintWriter?

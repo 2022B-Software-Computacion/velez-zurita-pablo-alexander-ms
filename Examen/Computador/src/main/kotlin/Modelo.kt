@@ -22,7 +22,7 @@ class Modelo {
 
     override fun toString(): String {
         return "id: $id, Modelo: $nombre,Fecha de lanzamiento: $fechaLanzamiento,  Precio: $$precio \n" +
-                "Descripcion:\n $descripcion"
+                "Descripcion: $descripcion"
     }
 
     fun obtenerAtributos(): String {
