@@ -95,7 +95,7 @@ fun mostrarMarca(){
             val nuevaMarca = Marca()
             nuevaMarca.id = dato.toInt()
             dato = tokens.nextToken()
-            nuevaMarca.nombre = dato
+            nuevaMarca.nombre =dato
             dato = tokens.nextToken()
             nuevaMarca.paisOrigen = dato
             dato = tokens.nextToken()
