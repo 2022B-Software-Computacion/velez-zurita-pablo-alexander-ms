@@ -5,17 +5,12 @@ import java.util.*
 fun main(){
     var opcion = ""
     do {
-        println("## MARCAS DE COMPUTADOR ##")
-        println("1.- Ingresar una nueva Marca")
-        println("2.- Listar Marcas ingresadas")
-        println("3.- Actualizar una Marca ingresada")
-        println("4.- Eliminar una Marca ingresada")
+        println("######### MARCAS DE COMPUTADOR ########|######## MODELOS DE COMPUTADOR ########")
+        println("1.- Ingresar una nueva Marca           |5.- Ingresar un nuevo Modelo")
+        println("2.- Listar Marcas ingresadas           |6.- Listar Modelos ingresados")
+        println("3.- Actualizar una Marca ingresada     |7.- Actualizar un Modelo ingresado")
+        println("4.- Eliminar una Marca ingresada       |8.- Eliminar un Modelo ingresado")
         println("-------------------------------------")
-        println("## MODELOS DE COMPUTADOR ##")
-        println("5.- Ingresar un nuevo Modelo")
-        println("6.- Listar Modelos ingresados")
-        println("7.- Actualizar un Modelo ingresado")
-        println("8.- Eliminar un Modelo ingresado")
         println("9.- Finalizar programa")
         println("Ingrese una opcion")
 
@@ -34,10 +29,18 @@ fun main(){
             ("4") -> {
                 eliminarMarca()
             }
-            ("5") -> println("Opcion 5")
-            ("6") -> println("Opcion 6")
-            ("7") -> println("Opcion 7")
-            ("8") -> println("Opcion 8")
+            ("5") -> {
+                registrarModelo()
+            }
+            ("6") -> {
+                mostrarModelo()
+            }
+            ("7") -> {
+                actualizarInformacionModelo()
+            }
+            ("8") -> {
+                eliminarModelo()
+            }
             ("9") -> {
                 println("Hemos salido")
             }
@@ -125,7 +128,7 @@ fun agregarListaModelos(): MutableList<Modelo>{
         if (opcionIf =="N" || opcionIf =="n"){
             return listaModelosNuevos
         }else if (opcionIf =="Y" || opcionIf =="y"){
-            println("Ingrese el ID del modelo")
+            println("Ingrese el ID de un modelo")
             aux = obtenerModeloPorId(readln().toInt())
             listaModelosNuevos.add(aux)
         }else{
@@ -153,7 +156,7 @@ fun obtenerModeloPorId(id: Int): Modelo{
             dato = tokens.nextToken()
             nuevoModelo.precio = dato.toFloat()
             dato = tokens.nextToken()
-            nuevoModelo.descripcion = dato.toString()
+            nuevoModelo.descripcion = dato
             listaModelos.add(nuevoModelo)
         }
     } catch (e: IOException) {
@@ -283,6 +286,187 @@ fun eliminarMarca(){
         fw = FileWriter(archivo)
         pw = PrintWriter(fw)
         listaMarcas.forEach {
+            pw.println(it.obtenerAtributos())
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+        try {
+            fw?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
+
+fun registrarModelo(){
+    var miModelo = Modelo()
+    var archivo: File?
+    var fw: FileWriter? = null
+    var pw: PrintWriter?
+    // Obtener los datos de la canción
+    print("Escriba el id del modelo: ")
+    miModelo.id = readln().toInt()
+    print("Escriba el nombre del modelo: ")
+    miModelo.nombre = readln()
+    print("Escriba la fecha de lanzamiento del modelo (yy-mm-dd): ")
+    miModelo.fechaLanzamiento = LocalDate.parse(readln())
+    print("Escriba el precio promedio del modelo: ")
+    miModelo.precio = readln().toFloat()
+    print("Escriba la descripcion del modelo: ")
+    miModelo.descripcion = readln()
+    try {
+        archivo = File("Modelo.txt")
+        fw = FileWriter(archivo, true)
+        pw = PrintWriter(fw)
+        //
+        pw.println(miModelo.obtenerAtributos())
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+        try {
+            fw?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
+
+fun mostrarModelo(){
+    val listaModelos = mutableListOf<Modelo>()
+    try {
+        val file = File("Modelo.txt")
+        val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
+        reader.lines().forEach {
+            val tokens = StringTokenizer(it, ",")
+            var dato: String = tokens.nextToken()
+            val nuevoModelo = Modelo()
+            nuevoModelo.id = dato.toInt()
+            dato = tokens.nextToken()
+            nuevoModelo.nombre = dato
+            dato = tokens.nextToken()
+            nuevoModelo.fechaLanzamiento = LocalDate.parse(dato)
+            dato = tokens.nextToken()
+            nuevoModelo.precio = dato.toFloat()
+            dato = tokens.nextToken()
+            nuevoModelo.descripcion = dato
+            listaModelos.add(nuevoModelo)
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+    listaModelos.forEach{
+        println(it.toString())
+    }
+}
+
+fun actualizarInformacionModelo(){
+    val listaModelos = mutableListOf<Modelo>()
+    println("Introduzca el ID del modelo que desea actualizar")
+    val id = readln().toInt()
+    // Lee el archivo y genera una lista con los modelos actuales
+    val file = File("Modelo.txt")
+    val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
+    reader.lines().forEach {
+        val tokens = StringTokenizer(it, ",")
+        var dato: String = tokens.nextToken()
+        val nuevoModelo = Modelo()
+        nuevoModelo.id = dato.toInt()
+        dato = tokens.nextToken()
+        nuevoModelo.nombre = dato
+        dato = tokens.nextToken()
+        nuevoModelo.fechaLanzamiento = LocalDate.parse(dato)
+        dato = tokens.nextToken()
+        nuevoModelo.precio = dato.toFloat()
+        dato = tokens.nextToken()
+        nuevoModelo.descripcion = dato
+        listaModelos.add(nuevoModelo)
+    }
+    var modeloAux = Modelo()
+    listaModelos.forEach {
+        if (it.id == id){
+            modeloAux = it
+        }
+    }
+    val indiceCancion = listaModelos.indexOf(modeloAux)
+    // Eliminamos la cancion anterior
+    listaModelos.remove(modeloAux)
+    // Actualizamos la cancion
+    print("Escriba el nuevo nombre del modelo: ")
+    modeloAux.nombre = readln()
+    print("Escriba la nueva fecha de lanzamiento del modelo (yy-mm-dd): ")
+    modeloAux.fechaLanzamiento = LocalDate.parse(readln())
+    print("Escriba el nuevo precio promedio del modelo: ")
+    modeloAux.precio = readln().toFloat()
+    print("Escriba la nueva descripcion del modelo: ")
+    modeloAux.descripcion = readln()
+    // Añadimos la cancion actualizada
+    listaModelos.add(indiceCancion, modeloAux)
+
+    //println(listaCanciones)
+
+    // Vamos a reescribir toodo el archivo
+    var archivo: File?
+    var fw: FileWriter? = null
+    var pw: PrintWriter?
+    try {
+        archivo = File("Canciones.txt")
+        fw = FileWriter(archivo)
+        pw = PrintWriter(fw)
+        listaModelos.forEach {
+            pw.println(it.obtenerAtributos())
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+        try {
+            fw?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
+
+fun eliminarModelo(){
+    val listaModelos = mutableListOf<Modelo>()
+    println("Introduzca el ID del modelo que desea eliminar")
+    val id = readln().toInt()
+    // Lee el archivo y genera una lista con los modelos actuales
+    val file = File("Modelo.txt")
+    val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
+    reader.lines().forEach {
+        val tokens = StringTokenizer(it, ",")
+        var dato: String = tokens.nextToken()
+        val nuevoModelo = Modelo()
+        nuevoModelo.id = dato.toInt()
+        dato = tokens.nextToken()
+        nuevoModelo.nombre = dato
+        dato = tokens.nextToken()
+        nuevoModelo.fechaLanzamiento = LocalDate.parse(dato)
+        dato = tokens.nextToken()
+        nuevoModelo.precio = dato.toFloat()
+        dato = tokens.nextToken()
+        nuevoModelo.descripcion = dato
+        listaModelos.add(nuevoModelo)
+    }
+    var modeloAux = Modelo()
+    listaModelos.forEach {
+        if (it.id == id){
+            modeloAux = it
+        }
+    }
+    listaModelos.remove(modeloAux)
+    // Ya se tiene una lista sin el elemento
+    // Vamos a reescribir toodo el archivo
+    var archivo: File?
+    var fw: FileWriter? = null
+    var pw: PrintWriter?
+    try {
+        archivo = File("Modelo.txt")
+        fw = FileWriter(archivo)
+        pw = PrintWriter(fw)
+        listaModelos.forEach {
             pw.println(it.obtenerAtributos())
         }
     } catch (e: Exception) {

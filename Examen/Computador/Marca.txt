@@ -1,1 +1,1 @@
-2,Dell,Estados Unidos,2022-10-20
+2,Dell,Estados Unidos,2000-10-09,1,2
