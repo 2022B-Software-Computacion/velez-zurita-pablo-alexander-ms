@@ -1,0 +1,2 @@
+1,Macbook Air,2005-10-12,2000.0,Nuevo ingreso
+2,Macbook Pro,2022-10-01,1500.0,chip M2 - 16Gb Ram - 500Gb Ssd

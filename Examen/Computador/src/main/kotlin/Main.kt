@@ -42,9 +42,9 @@ fun main(){
                 eliminarModelo()
             }
             ("9") -> {
-                println("Hemos salido")
+                println("Fin del programa")
             }
-            else -> println("Fina del programa")
+            else -> println("Opcion no valida")
         }
     } while (opcion != "9")
 }
