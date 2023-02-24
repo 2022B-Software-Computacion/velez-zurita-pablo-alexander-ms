@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "26701782065",
+    "project_id": "facebookclone-pavz",
+    "storage_bucket": "facebookclone-pavz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26701782065:android:2514c1f5dfeb2bb63e8910",
+        "android_client_info": {
+          "package_name": "com.example.facebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26701782065-3uejucr66ml723i8c5iqtmkc3r7m1a75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-UoWJ1v_kRWaTG_avqx8s83vOPlgL-28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26701782065-3uejucr66ml723i8c5iqtmkc3r7m1a75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
