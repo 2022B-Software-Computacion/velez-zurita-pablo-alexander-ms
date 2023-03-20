@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "805504600675",
+    "project_id": "examen2b-marcamodelo",
+    "storage_bucket": "examen2b-marcamodelo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805504600675:android:85ee2af5955120bcc34656",
+        "android_client_info": {
+          "package_name": "com.example.examen2b_marcamodelo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "805504600675-dhtuphhbloq0vk28o21gqm2vl5mjm5dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM4AuZGuomo7-FuI54GHTzxJ_tMU6kFNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805504600675-dhtuphhbloq0vk28o21gqm2vl5mjm5dj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
